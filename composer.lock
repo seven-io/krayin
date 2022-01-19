@@ -1,0 +1,84 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "eab164386515fc4c58d414a35cea09a6",
+    "packages": [
+        {
+            "name": "sms77/api",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sms77io/php-client.git",
+                "reference": "ec0339d72bcdfa930b80ab1c8cd2e2838b944d46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sms77io/php-client/zipball/ec0339d72bcdfa930b80ab1c8cd2e2838b944d46",
+                "reference": "ec0339d72bcdfa930b80ab1c8cd2e2838b944d46",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "ext-soap": "*",
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sms77\\Api\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sms77 e.K.",
+                    "email": "a.matthies@sms77.io",
+                    "homepage": "https://www.sms77.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Official API Client for requesting the Sms77.io SMS Gateway.",
+            "homepage": "https://github.com/sms77io/php-client",
+            "keywords": [
+                "2fa",
+                "cnam",
+                "gateway",
+                "hlr",
+                "mnp",
+                "sms",
+                "text2speech",
+                "tts"
+            ],
+            "support": {
+                "docs": "https://github.com/sms77io/php-client",
+                "email": "support@sms77.io",
+                "issues": "https://github.com/sms77io/php-client/issues",
+                "rss": "https://www.sms77.io/de/feed/",
+                "source": "https://github.com/sms77io/php-client"
+            },
+            "time": "2021-09-21T07:31:40+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
+}

@@ -1,0 +1,41 @@
+{
+    "authors": [
+        {
+            "email": "support@sms77.io",
+            "homepage": "https://www.sms77.io",
+            "name": "sms77 e.K.",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sms77\\Krayin\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {},
+            "providers": [
+                "Sms77\\Krayin\\Providers\\Sms77ServiceProvider"
+            ]
+        }
+    },
+    "keywords": [
+        "sms",
+        "gateway",
+        "krayin"
+    ],
+    "license": "MIT",
+    "name": "sms77/krayin",
+    "require": {
+        "ext-json": "*",
+        "krayin/laravel-crm": "^1.0"
+    },
+    "support": {
+        "docs": "https://github.com/sms77io/krayin",
+        "email": "support@sms77.io",
+        "rss": "https://www.sms77.io/de/feed/",
+        "source": "https://github.com/sms77io/krayin"
+    },
+    "type": "library"
+}
