@@ -4,8 +4,8 @@ namespace Sms77\Krayin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\Contact\PersonDataGrid as BasePersonDataGrid;
-use Sms77\Krayin\Datagrids\Contact\PersonDataGrid;
+use Webkul\Admin\DataGrids\Contact\OrganizationDataGrid;
+use Webkul\Admin\DataGrids\Contact\PersonDataGrid;
 
 class Sms77ServiceProvider extends ServiceProvider {
     /**
@@ -39,9 +39,27 @@ class Sms77ServiceProvider extends ServiceProvider {
     public function register() {
         $this->registerConfig();
 
-        $this->app->extend(BasePersonDataGrid::class, function ($service, $app) {
-            return new PersonDataGrid;
-        });
+        $this->app->extend(PersonDataGrid::class,
+            function (PersonDataGrid $service, $app) {
+                $service->addAction([
+                    'method' => 'GET',
+                    'icon' => 'sms77-icon',
+                    'route' => 'admin.sms77.sms',
+                    'title' => trans('sms77::app.send_sms'),
+                ]);
+                return $service;
+            });
+
+        $this->app->extend(OrganizationDataGrid::class,
+            function (OrganizationDataGrid $service, $app) {
+                $service->addAction([
+                    'method' => 'GET',
+                    'icon' => 'sms77-icon',
+                    'route' => 'admin.sms77.sms_organization',
+                    'title' => trans('sms77::app.send_sms'),
+                ]);
+                return $service;
+            });
     }
 
     /**

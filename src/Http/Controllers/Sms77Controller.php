@@ -3,6 +3,7 @@
 namespace Sms77\Krayin\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -38,7 +39,6 @@ class Sms77Controller extends Controller {
         $this->sms77 = $sms77;
         $this->smsRepository = $smsRepository;
         $this->personRepository = $personRepository;
-        request()->request->add(['entity_type' => 'persons']);
     }
 
     /**
@@ -54,13 +54,26 @@ class Sms77Controller extends Controller {
      * @param int $id
      * @return View
      */
-    public function sms(int $id): View {
-        $phone = null;
-        /** @var Person $person */
+    public function smsPerson(int $id): View {
+        return $this->sms('persons', $id);
+    }
 
-        request()->request->add(compact('id'));
+    /**
+     * Compose SMS for destined for a single organization.
+     * @param int $id
+     * @return View
+     */
+    public function smsOrganization(int $id): View {
+        return $this->sms('organizations', $id);
+    }
 
-        return view('sms77::sms', compact('id', 'phone'));
+    /**
+     * @param string $entityType
+     * @param int $id
+     * @return View
+     */
+    protected function sms(string $entityType, int $id): View {
+        return view('sms77::sms', compact('entityType', 'id'));
     }
 
     public function smsSend(): RedirectResponse {

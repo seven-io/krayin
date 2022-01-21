@@ -12,36 +12,35 @@
                 <h1>@lang('sms77::app.send_sms')</h1>
             </div>
 
-            <div class='page-action'>
-
-            </div>
+            <div class='page-action'></div>
         </div>
 
         <form method='POST' action='{{ route('admin.sms77.sms_submit') }}'>
             @csrf()
 
             <div class='page-content'>
-                <input name="id" value="{{ $id }}" type='hidden'/>
+                <input name='entityType' value='{{ $entityType }}' type='hidden'/>
+                <input name='id' value='{{ $id }}' type='hidden'/>
 
-                <div class="form-group" :class="[errors.has('text') ? 'has-error' : '']">
-                    <label for="text" class="required">
+                <div class='form-group' :class="[errors.has('text') ? 'has-error' : '']">
+                    <label for='text' class='required'>
                         @lang('sms77::app.text')
                     </label>
 
                     <textarea
-                            name="text"
-                            class="control"
-                            id="text"
+                            name='text'
+                            class='control'
+                            id='text'
                             v-validate="'required'"
-                            data-vv-as="&quot;@lang('sms77::app.text')&quot;"
+                            data-vv-as='&quot;@lang('sms77::app.text')&quot;'
                     >{{ old('text') }}</textarea>
 
-                    <span class="control-error" v-if="errors.has('text')">
+                    <span class='control-error' v-if="errors.has('text')">
                         @{{ errors.first('text') }}
                     </span>
                 </div>
 
-                <button type="submit" class="btn btn-md btn-primary">
+                <button type='submit' class='btn btn-md btn-primary'>
                     @lang('sms77::app.send_sms')
                 </button>
             </div>
