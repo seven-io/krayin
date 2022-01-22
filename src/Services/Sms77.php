@@ -127,7 +127,7 @@ class Sms77 {
             ];
 
             $smsParams = [
-                'flash' => $request->post('flash', 0),
+                'flash' => filter_var($request->post('flash'), FILTER_VALIDATE_BOOLEAN),
                 'from' => $request->post('from'),
                 'json' => 1,
             ];

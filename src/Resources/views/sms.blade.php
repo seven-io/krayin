@@ -22,20 +22,38 @@
                 <input name='entityType' value='{{ $entityType }}' type='hidden'/>
                 <input name='id' value='{{ $id }}' type='hidden'/>
 
-                <div class='form-group' :class="[errors.has('text') ? 'has-error' : '']">
+                <div class='form-group' :class='[errors.has(`flash`) ? `has-error` : ``]'>
+                    <label for='flash'>
+                        @lang('sms77::app.flash')
+                    </label>
+
+                    <label class='switch'>
+                        <input
+                                class='control'
+                                id='flash'
+                                name='flash'
+                                type='checkbox'
+                                {{ old('flash') ? 'checked' : '' }}
+                        />
+
+                        <span class='slider round'></span>
+                    </label>
+                </div>
+
+                <div class='form-group' :class='[errors.has(`text`) ? `has-error` : ``]'>
                     <label for='text' class='required'>
                         @lang('sms77::app.text')
                     </label>
 
                     <textarea
-                            name='text'
                             class='control'
-                            id='text'
-                            v-validate="'required'"
                             data-vv-as='&quot;@lang('sms77::app.text')&quot;'
+                            id='text'
+                            name='text'
+                            v-validate='`required|max:1520`'
                     >{{ old('text') }}</textarea>
 
-                    <span class='control-error' v-if="errors.has('text')">
+                    <span class='control-error' v-if='errors.has(`text`)'>
                         @{{ errors.first('text') }}
                     </span>
                 </div>
