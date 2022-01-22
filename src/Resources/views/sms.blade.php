@@ -40,6 +40,28 @@
                     </label>
                 </div>
 
+                <div class='form-group' :class='[errors.has(`from`) ? `has-error` : ``]'>
+                    <label for='from'>
+                        @lang('sms77::app.from')
+                    </label>
+
+                    <input
+                            class='control'
+                            data-vv-as='&quot;@lang('sms77::app.from')&quot;'
+                            name='from'
+                            id='from'
+                            v-validate='{
+                             max: 16,
+                             regex: /^([+]?[0-9]{1,16}|[a-zA-Z0-9 \-_+/()&$!,.@]{1,11})$/
+                            }'
+                            value='{{ old('from') }}'
+                    />
+
+                    <span class='control-error' v-if='errors.has(`from`)'>
+                        @{{ errors.first('from') }}
+                    </span>
+                </div>
+
                 <div class='form-group' :class='[errors.has(`text`) ? `has-error` : ``]'>
                     <label for='text' class='required'>
                         @lang('sms77::app.text')

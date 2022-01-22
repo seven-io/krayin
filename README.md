@@ -66,6 +66,10 @@ php artisan migrate
 
 Go to `Contacts -> Persons` and click on the sms77 icon in the actions column.
 
+### Send SMS to Organization
+
+Go to `Contacts -> Organizations` and click on the sms77 icon in the actions column.
+
 You can use property placeholders which resolve to the person's property as long as it is
 defined, e.g. {{name}} resolves to the person's name.
 
