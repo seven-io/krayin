@@ -5,17 +5,14 @@ namespace Sms77\Krayin\Services;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Sms77\Krayin\Exception\UnprocessableEntityTypeException;
+use Sms77\Krayin\Exceptions\UnprocessableEntityTypeException;
 use Sms77\Krayin\Models\Sms;
-use Webkul\Contact\Models\Organization;
 use Webkul\Contact\Models\Person;
 use Webkul\Contact\Repositories\OrganizationRepository;
 use Webkul\Contact\Repositories\PersonRepository;
-use Webkul\Core\Eloquent\Repository;
 
 class Sms77 {
     /** @var string $apiKey */
