@@ -9,6 +9,7 @@ return [
     'general_settings' => 'General Settings',
     'name' => 'sms77',
     'no_recipients' => 'No recipients found for given filters.',
+    'performance_tracking' => 'Performance Tracking',
     'phone' => 'Phone',
     'send_sms' => 'Send SMS',
     'sms_sent' => 'Sent :msgCount SMS to :receivers recipients for :cost €',

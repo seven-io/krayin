@@ -33,7 +33,7 @@ class Sms77 {
      * @param CoreConfigRepository $coreConfigRepository
      */
     public function __construct(
-        PersonRepository       $personRepository,
+        PersonRepository     $personRepository,
         CoreConfigRepository $coreConfigRepository
     ) {
         $this->personRepository = $personRepository;
@@ -58,40 +58,6 @@ class Sms77 {
         }
 
         return config('services.sms77.api_key');
-    }
-
-    protected function getContactsNumbers(...$persons): string {
-        $numbers = [];
-
-        foreach ($persons as $person) {
-            $contactNumbers = $person->getAttributeValue('contact_numbers');
-
-            foreach ($contactNumbers ?? [] as $contactNumber)
-                $numbers[] = $contactNumber['value'];
-        }
-
-        return implode(',', array_unique($numbers));
-    }
-
-    /**
-     * @param Request $request
-     * @return Person[]
-     */
-    protected function getPersons(Request $request): array {
-        $entityType = $request->post('entityType');
-        $id = $request->post('id');
-
-        switch ($entityType) {
-            case 'persons':
-                return [$this->personRepository->find($id)];
-            case 'organizations':
-                /** @var Collection $collection */
-                $collection = $this->personRepository
-                    ->findByField('organization_id', $id);
-                return $collection->all();
-            default:
-                throw new UnprocessableEntityTypeException($entityType, $id);
-        }
     }
 
     public function sms(Request $request): array {
@@ -136,11 +102,15 @@ class Sms77 {
                 'to' => $this->getContactsNumbers(...$persons),
             ];
 
-            $smsParams = [
-                'flash' => filter_var($request->post('flash'), FILTER_VALIDATE_BOOLEAN),
-                'from' => $request->post('from'),
-                'json' => 1,
-            ];
+            $smsParams = ['json' => true,];
+
+            foreach (['from',] as $key) {
+                $value = $request->post($key);
+                if ($value) $smsParams[$key] = $value;
+            }
+
+            foreach (['flash', 'performance_tracking',] as $key)
+                if ('on' === $request->post($key)) $smsParams[$key] = true;
 
             foreach ($requests as $req) {
                 try {
@@ -174,5 +144,39 @@ class Sms77 {
         }
 
         return $errors;
+    }
+
+    /**
+     * @param Request $request
+     * @return Person[]
+     */
+    protected function getPersons(Request $request): array {
+        $entityType = $request->post('entityType');
+        $id = $request->post('id');
+
+        switch ($entityType) {
+            case 'persons':
+                return [$this->personRepository->find($id)];
+            case 'organizations':
+                /** @var Collection $collection */
+                $collection = $this->personRepository
+                    ->findByField('organization_id', $id);
+                return $collection->all();
+            default:
+                throw new UnprocessableEntityTypeException($entityType, $id);
+        }
+    }
+
+    protected function getContactsNumbers(...$persons): string {
+        $numbers = [];
+
+        foreach ($persons as $person) {
+            $contactNumbers = $person->getAttributeValue('contact_numbers');
+
+            foreach ($contactNumbers ?? [] as $contactNumber)
+                $numbers[] = $contactNumber['value'];
+        }
+
+        return implode(',', array_unique($numbers));
     }
 }

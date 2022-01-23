@@ -1,7 +1,7 @@
 @extends('admin::layouts.master')
 
 @section('page_title')
-    @lang('sms77::app.send_sms') - sms77
+    @lang('sms77::app.send_sms') - @lang('sms77::app.name')
 @stop
 
 @section('content-wrapper')
@@ -34,6 +34,25 @@
                                 name='flash'
                                 type='checkbox'
                                 {{ old('flash') ? 'checked' : '' }}
+                        />
+
+                        <span class='slider round'></span>
+                    </label>
+                </div>
+
+                <div class='form-group'
+                     :class='[errors.has(`performance_tracking`) ? `has-error` : ``]'>
+                    <label for='performance_tracking'>
+                        @lang('sms77::app.performance_tracking')
+                    </label>
+
+                    <label class='switch'>
+                        <input
+                                class='control'
+                                id='performance_tracking'
+                                name='performance_tracking'
+                                type='checkbox'
+                                {{ old('performance_tracking') ? 'checked' : '' }}
                         />
 
                         <span class='slider round'></span>

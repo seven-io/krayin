@@ -9,6 +9,7 @@ return [
     'general_settings' => 'Generelle Einstellungen',
     'name' => 'sms77',
     'no_recipients' => 'Keine Empfangsziele mit den gegebenen Filtern gefunden.',
+    'performance_tracking' => 'Performance Tracking',
     'phone' => 'Rufnummer',
     'send_sms' => 'SMS senden',
     'sms_sent' => ':msgCount SMS versandt an :receivers Empfangsziele für :cost €',
