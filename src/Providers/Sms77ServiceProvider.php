@@ -42,8 +42,8 @@ class Sms77ServiceProvider extends ServiceProvider {
         $this->app->extend(PersonDataGrid::class,
             function (PersonDataGrid $service, $app) {
                 $service->addAction([
-                    'method' => 'GET',
                     'icon' => 'sms77-icon',
+                    'method' => 'GET',
                     'route' => 'admin.sms77.sms',
                     'title' => trans('sms77::app.send_sms'),
                 ]);
@@ -53,8 +53,8 @@ class Sms77ServiceProvider extends ServiceProvider {
         $this->app->extend(OrganizationDataGrid::class,
             function (OrganizationDataGrid $service, $app) {
                 $service->addAction([
-                    'method' => 'GET',
                     'icon' => 'sms77-icon',
+                    'method' => 'GET',
                     'route' => 'admin.sms77.sms_organization',
                     'title' => trans('sms77::app.send_sms'),
                 ]);
@@ -69,5 +69,6 @@ class Sms77ServiceProvider extends ServiceProvider {
     protected function registerConfig() {
         $this->mergeConfigFrom(dirname(__DIR__) . '/Config/menu.php', 'menu.admin');
         $this->mergeConfigFrom(dirname(__DIR__) . '/Config/acl.php', 'acl');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/system.php', 'core_config');
     }
 }

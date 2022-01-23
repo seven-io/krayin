@@ -2,24 +2,25 @@
 
 Adds the functionality to send SMS via sms77.
 
-# Prerequisites
+## Prerequisites
 
 - [sms77](https://www.sms77.io) API Key - can be created in
   your [developer dashboard](https://app.sms77.io/developer)
 - [Krayin CRM](https://krayincrm.com/) - tested with v1.2.x
 
-# Installation
+## Installation
 
 1. Register the package as service provider by appending an entry in **config/app.php**.
 
 ```php
 <?php
-
 return [
+    // ...
     'providers' => [
         // ...
         Sms77\Krayin\Providers\Sms77ServiceProvider::class,
-    ]
+    ],
+        // ...
 ];
 ```
 
@@ -35,13 +36,33 @@ return [
 }
 ```
 
-3. Define your sms77 API key in the environment by adding an entry to the **.env** file.
+3. Execute these commands to clear the cache and migrate the database:
+
+```
+php artisan cache:clear
+php artisan migrate
+```
+
+## Setup
+
+Before you can start sending SMS you will need to submit your sms77 API key. This can be
+in two ways:
+
+### Configuration via administration panel
+
+1. Navigate to **Dashboard -> Configuration -> sms77** in your Krayin admin panel.
+2. Enter your API Key and submit by clicking on **Save**.
+
+### Setting an environment variable
+
+1. Define your sms77 API key in the environment by adding an entry to the **.env** file in
+   the root of your project.
 
 ```dotenv
 SMS77_API_KEY=YourSuperSecretApiKeyFromSms77
 ```
 
-4. Go to **config/services.php** and add the following lines:
+2. Add the following lines to **config/services.php**:
 
 ```php
 return [
@@ -52,13 +73,12 @@ return [
 ];
 ```
 
-5. Execute these commands to clear the cache, cache the config and migrate database:
+Clear the cache and cache the configuration by executing
+`php artisan cache:clear && php artisan config:cache`.
 
-```
-php artisan cache:clear
-php artisan config:cache
-php artisan migrate
-```
+**Please note:** Setting the API key via configuration takes precedence over defining it
+as an environment variable. Also, the value from the environment won't get shown in the
+configuration form due to technical limitations.
 
 ## Usage
 

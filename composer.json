@@ -28,6 +28,7 @@
     "license": "MIT",
     "name": "sms77/krayin",
     "require": {
+        "php": "^7.4|^8.0",
         "ext-json": "*",
         "krayin/laravel-crm": "^1.0"
     },

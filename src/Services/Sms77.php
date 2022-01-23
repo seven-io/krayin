@@ -11,33 +11,34 @@ use Illuminate\Support\Facades\Log;
 use Sms77\Krayin\Exceptions\UnprocessableEntityTypeException;
 use Sms77\Krayin\Models\Sms;
 use Webkul\Contact\Models\Person;
-use Webkul\Contact\Repositories\OrganizationRepository;
 use Webkul\Contact\Repositories\PersonRepository;
+use Webkul\Core\Models\CoreConfig;
+use Webkul\Core\Repositories\CoreConfigRepository;
 
 class Sms77 {
-    /** @var string $apiKey */
-    protected $apiKey;
+    /** @var string|null $apiKey */
+    protected ?string $apiKey;
 
     /** @var Client $client */
-    protected $client;
+    protected Client $client;
 
     /** @var PersonRepository $personRepository */
-    protected $personRepository;
+    protected PersonRepository $personRepository;
 
-    /** @var OrganizationRepository $organizationRepository */
-    protected $organizationRepository;
+    /** @var CoreConfigRepository $coreConfigRepository */
+    protected CoreConfigRepository $coreConfigRepository;
 
     /**
      * @param PersonRepository $personRepository
-     * @param OrganizationRepository $organizationRepository
+     * @param CoreConfigRepository $coreConfigRepository
      */
     public function __construct(
         PersonRepository       $personRepository,
-        OrganizationRepository $organizationRepository
+        CoreConfigRepository $coreConfigRepository
     ) {
         $this->personRepository = $personRepository;
-        $this->organizationRepository = $organizationRepository;
-        $this->apiKey = config('services.sms77.api_key');
+        $this->coreConfigRepository = $coreConfigRepository;
+        $this->apiKey = self::getApiKey();
         $this->client = new Client([
             'base_uri' => 'https://gateway.sms77.io/api/',
             RequestOptions::HEADERS => [
@@ -45,6 +46,18 @@ class Sms77 {
                 'X-Api-Key' => $this->apiKey,
             ],
         ]);
+    }
+
+    private function getApiKey(): ?string {
+        $coreConfig = $this->coreConfigRepository->findOneByField('code',
+            'sms77.general.api_key');
+
+        if ($coreConfig) {
+            /** @var CoreConfig $coreConfig */
+            return $coreConfig->getAttribute('value');
+        }
+
+        return config('services.sms77.api_key');
     }
 
     protected function getContactsNumbers(...$persons): string {
