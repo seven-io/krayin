@@ -1,27 +1,15 @@
-@extends('admin::layouts.master')
+@extends('sms77::layouts.sms')
 
-@section('page_title')
-    sms77
+@section('title')
+    @lang('sms77::app.send_sms_bulk')
 @stop
 
-@section('content-wrapper')
-    <div class='content full-page dashboard'>
-        <div class='page-header'>
-            <div class='page-title'>
-                <h1>sms77</h1>
-            </div>
+@section('heading')
+    @lang('sms77::app.send_sms_bulk')
+@stop
 
-            <div class='page-action'></div>
-        </div>
-
-        <div class='page-content'>
-            <p>
-                @lang('sms77::app.about')
-            </p>
-
-            <a href='https://www.sms77.io' target='_blank'>
-                <img alt='' src='{{ asset('vendor/sms77/assets/images/sms77.png') }}'/>
-            </a>
-        </div>
-    </div>
+@section('filters')
+    <p>
+        @lang('sms77::app.about_bulk')
+    </p>
 @stop

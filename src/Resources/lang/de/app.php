@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'about' => 'SMS versenden via sms77 - 
-    ein in Deutschland ansässiger Telekommunikationsanbieter seit 2003.',
+    'about_bulk' => 'Senden Sie SMS an alle Personen auf einem Schlag.',
     'api_key' => 'API-Schlüssel',
+    'contact_type' => 'Kontakt-Type',
     'flash' => 'Flash',
     'from' => 'Absenderkennung',
     'general_settings' => 'Generelle Einstellungen',
@@ -12,6 +12,7 @@ return [
     'performance_tracking' => 'Performance Tracking',
     'phone' => 'Rufnummer',
     'send_sms' => 'SMS senden',
+    'send_sms_bulk' => 'SMS-Massenversand',
     'sms_sent' => ':msgCount SMS versandt an :receivers Empfangsziele für :cost €',
     'text' => 'Text',
 ];

@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'about' => 'Send SMS via sms77 - 
-    a Germany based telecommunications provider established in 2003.',
+    'about_bulk' => 'Send SMS to all persons at once.',
     'api_key' => 'API Key',
+    'contact_type' => 'Contact Type',
     'flash' => 'Flash',
     'from' => 'Sender Identifier',
     'general_settings' => 'General Settings',
@@ -12,6 +12,7 @@ return [
     'performance_tracking' => 'Performance Tracking',
     'phone' => 'Phone',
     'send_sms' => 'Send SMS',
+    'send_sms_bulk' => 'Send Bulk SMS',
     'sms_sent' => 'Sent :msgCount SMS to :receivers recipients for :cost €',
     'text' => 'Text',
 ];

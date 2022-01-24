@@ -3,7 +3,6 @@
 namespace Sms77\Krayin\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,20 +10,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
 use Sms77\Krayin\Repositories\SmsRepository;
 use Sms77\Krayin\Services\Sms77;
-use Webkul\Contact\Models\Person;
 use Webkul\Contact\Repositories\PersonRepository;
 
 class Sms77Controller extends Controller {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /** @var PersonRepository $personRepository */
-    protected $personRepository;
+    protected PersonRepository $personRepository;
 
     /** @var Sms77 $sms77 */
-    protected $sms77;
+    protected Sms77 $sms77;
 
     /** @var SmsRepository $smsRepository */
-    protected $smsRepository;
+    protected SmsRepository $smsRepository;
 
     /**
      * @param Sms77 $sms77
@@ -46,7 +44,7 @@ class Sms77Controller extends Controller {
      * @return View
      */
     public function index(): View {
-        return view('sms77::index');
+        return view('sms77::index', ['entityType' => 'persons']);
     }
 
     /**
@@ -85,6 +83,7 @@ class Sms77Controller extends Controller {
             if (count($errors)) return redirect()->back();
         }
 
+        return redirect()->back();
         return redirect()->route('admin.contacts.persons.index');
     }
 }

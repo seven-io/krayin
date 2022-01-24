@@ -156,7 +156,11 @@ class Sms77 {
 
         switch ($entityType) {
             case 'persons':
-                return [$this->personRepository->find($id)];
+                if ($id) return [$this->personRepository->find($id)];
+
+                /** @var Collection $collection */
+                $collection = $this->personRepository->all();
+                return $collection->all();
             case 'organizations':
                 /** @var Collection $collection */
                 $collection = $this->personRepository
