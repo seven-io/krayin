@@ -1,6 +1,6 @@
 <?php
 
-namespace Sms77\Krayin\Contracts;
+namespace Seven\Krayin\Contracts;
 
 interface Sms {
 }

@@ -2,9 +2,9 @@
 
 return [
     [
-        'key' => 'sms77',
-        'name' => 'Sms77',
-        'route' => 'admin.sms77.index',
+        'key' => 'seven',
+        'name' => 'Seven',
+        'route' => 'admin.seven.index',
         'sort' => 2,
     ],
 ];

@@ -1,11 +1,10 @@
-![](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "sms77 Logo")
+![](https://www.seven.io/wp-content/uploads/Logo.svg "seven Logo")
 
-Adds the functionality to send SMS via sms77.
+Adds the functionality to send SMS via seven.
 
 ## Prerequisites
 
-- [sms77](https://www.sms77.io) API Key - can be created in
-  your [developer dashboard](https://app.sms77.io/developer)
+- An [API Key](https://help.seven.io/en/api-key-access) from [seven](https://www.seven.io)
 - [Krayin CRM](https://krayincrm.com/) - tested with v1.2.x
 
 ## Installation
@@ -18,7 +17,7 @@ return [
     // ...
     'providers' => [
         // ...
-        Sms77\Krayin\Providers\Sms77ServiceProvider::class,
+        Seven\Krayin\Providers\SevenServiceProvider::class,
     ],
         // ...
 ];
@@ -30,7 +29,7 @@ return [
 {
     "autoload": {
         "psr-4": {
-            "Sms77\\Krayin\\": "packages/Sms77/Krayin/src"
+            "Seven\\Krayin\\": "packages/Seven/Krayin/src"
         }
     }
 }
@@ -45,21 +44,21 @@ php artisan migrate
 
 ## Setup
 
-Before you can start sending SMS you will need to submit your sms77 API key. This can be
+Before you can start sending SMS you will need to submit your seven API key. This can be
 in two ways:
 
 ### Configuration via administration panel
 
-1. Navigate to **Dashboard -> Configuration -> sms77** in your Krayin admin panel.
+1. Navigate to **Dashboard -> Configuration -> seven** in your Krayin admin panel.
 2. Enter your API Key and submit by clicking on **Save**.
 
 ### Setting an environment variable
 
-1. Define your sms77 API key in the environment by adding an entry to the **.env** file in
+1. Define your seven API key in the environment by adding an entry to the **.env** file in
    the root of your project.
 
 ```dotenv
-SMS77_API_KEY=YourSuperSecretApiKeyFromSms77
+SEVEN_API_KEY=YourSuperSecretApiKeyFromSeven
 ```
 
 2. Add the following lines to **config/services.php**:
@@ -67,8 +66,8 @@ SMS77_API_KEY=YourSuperSecretApiKeyFromSms77
 ```php
 return [
     // ...
-    'sms77' => [
-        'api_key' => env('SMS77_API_KEY'), // must match the key from .env file added in the previous step
+    'seven' => [
+        'api_key' => env('SEVEN_API_KEY'), // must match the key from .env file added in the previous step
     ],
 ];
 ```
@@ -84,17 +83,17 @@ configuration form due to technical limitations.
 
 ### Send SMS to Person
 
-Go to `Contacts -> Persons` and click on the sms77 icon in the actions column.
+Go to `Contacts -> Persons` and click on the seven icon in the actions column.
 
 ### Send SMS to Organization
 
-Go to `Contacts -> Organizations` and click on the sms77 icon in the actions column.
+Go to `Contacts -> Organizations` and click on the seven icon in the actions column.
 
 You can use property placeholders which resolve to the person's property as long as it is
 defined, e.g. {{name}} resolves to the person's name.
 
 ## Support
 
-Need help? Feel free to [contact us](https://www.sms77.io/en/company/contact).
+Need help? Feel free to [contact us](https://www.seven.io/en/company/contact).
 
 [![MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)

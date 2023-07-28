@@ -1,9 +1,9 @@
 <?php
 
-namespace Sms77\Krayin\Models;
+namespace Seven\Krayin\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Sms77\Krayin\Contracts\Sms as SmsContract;
+use Seven\Krayin\Contracts\Sms as SmsContract;
 
 class Sms extends Model implements SmsContract {
     /**
@@ -34,7 +34,7 @@ class Sms extends Model implements SmsContract {
      * The table associated with the model.
      * @var string $table
      */
-    protected $table = 'sms77_sms';
+    protected $table = 'seven_sms';
 
     /**
      * Returns the response with duplicated values removed.

@@ -7,7 +7,7 @@ return [
     'flash' => 'Flash',
     'from' => 'Absenderkennung',
     'general_settings' => 'Generelle Einstellungen',
-    'name' => 'sms77',
+    'name' => 'seven',
     'no_recipients' => 'Keine Empfangsziele mit den gegebenen Filtern gefunden.',
     'performance_tracking' => 'Performance Tracking',
     'phone' => 'Rufnummer',

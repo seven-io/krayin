@@ -7,7 +7,7 @@ return [
     'flash' => 'Flash',
     'from' => 'Sender Identifier',
     'general_settings' => 'General Settings',
-    'name' => 'sms77',
+    'name' => 'seven',
     'no_recipients' => 'No recipients found for given filters.',
     'performance_tracking' => 'Performance Tracking',
     'phone' => 'Phone',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sms77\Krayin\Exceptions;
+namespace Seven\Krayin\Exceptions;
 
 use InvalidArgumentException;
 

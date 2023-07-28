@@ -1,6 +1,6 @@
 <?php
 
-namespace Sms77\Krayin\Models;
+namespace Seven\Krayin\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
 

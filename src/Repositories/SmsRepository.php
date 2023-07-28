@@ -1,6 +1,6 @@
 <?php
 
-namespace Sms77\Krayin\Repositories;
+namespace Seven\Krayin\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
@@ -10,6 +10,6 @@ class SmsRepository extends Repository {
      * @return mixed
      */
     function model() {
-        return 'Sms77\Krayin\Contracts\Sms';
+        return 'Seven\Krayin\Contracts\Sms';
     }
 }

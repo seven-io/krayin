@@ -1,13 +1,13 @@
 <?php
 
-namespace Sms77\Krayin\Providers;
+namespace Seven\Krayin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Contact\OrganizationDataGrid;
 use Webkul\Admin\DataGrids\Contact\PersonDataGrid;
 
-class Sms77ServiceProvider extends ServiceProvider {
+class SevenServiceProvider extends ServiceProvider {
     /**
      * Bootstrap services.
      * @return void
@@ -17,16 +17,16 @@ class Sms77ServiceProvider extends ServiceProvider {
 
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'sms77');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'seven');
 
         $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('vendor/sms77/assets'),
+            __DIR__ . '/../../publishable/assets' => public_path('vendor/seven/assets'),
         ], 'public');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'sms77');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'seven');
 
         Event::listen('admin.layout.head', function ($viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('sms77::layouts.style');
+            $viewRenderEventManager->addTemplate('seven::layouts.style');
         });
 
         $this->app->register(ModuleServiceProvider::class);
@@ -42,10 +42,10 @@ class Sms77ServiceProvider extends ServiceProvider {
         $this->app->extend(PersonDataGrid::class,
             function (PersonDataGrid $service, $app) {
                 $service->addAction([
-                    'icon' => 'sms77-icon',
+                    'icon' => 'seven-icon',
                     'method' => 'GET',
-                    'route' => 'admin.sms77.sms',
-                    'title' => trans('sms77::app.send_sms'),
+                    'route' => 'admin.seven.sms',
+                    'title' => trans('seven::app.send_sms'),
                 ]);
                 return $service;
             });
@@ -53,10 +53,10 @@ class Sms77ServiceProvider extends ServiceProvider {
         $this->app->extend(OrganizationDataGrid::class,
             function (OrganizationDataGrid $service, $app) {
                 $service->addAction([
-                    'icon' => 'sms77-icon',
+                    'icon' => 'seven-icon',
                     'method' => 'GET',
-                    'route' => 'admin.sms77.sms_organization',
-                    'title' => trans('sms77::app.send_sms'),
+                    'route' => 'admin.seven.sms_organization',
+                    'title' => trans('seven::app.send_sms'),
                 ]);
                 return $service;
             });

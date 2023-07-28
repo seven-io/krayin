@@ -1,8 +1,8 @@
 <?php
 
-namespace Sms77\Krayin\Providers;
+namespace Seven\Krayin\Providers;
 
-use Sms77\Krayin\Models\Sms;
+use Seven\Krayin\Models\Sms;
 use Webkul\Core\Providers\BaseModuleServiceProvider;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider {

@@ -1,9 +1,9 @@
-@extends('sms77::layouts.sms')
+@extends('seven::layouts.sms')
 
 @section('title')
-    @lang('sms77::app.send_sms')
+    @lang('seven::app.send_sms')
 @stop
 
 @section('heading')
-    @lang('sms77::app.send_sms')
+    @lang('seven::app.send_sms')
 @stop

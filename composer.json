@@ -1,22 +1,22 @@
 {
     "authors": [
         {
-            "email": "support@sms77.io",
-            "homepage": "https://www.sms77.io",
-            "name": "sms77 e.K.",
+            "email": "support@seven.io",
+            "homepage": "https://www.seven.io",
+            "name": "seven communications GmbH & Co. KG",
             "role": "Developer"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Sms77\\Krayin\\": "src/"
+            "Seven\\Krayin\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "aliases": {},
             "providers": [
-                "Sms77\\Krayin\\Providers\\Sms77ServiceProvider"
+                "Seven\\Krayin\\Providers\\SevenServiceProvider"
             ]
         }
     },
@@ -26,17 +26,17 @@
         "krayin"
     ],
     "license": "MIT",
-    "name": "sms77/krayin",
+    "name": "seven.io/krayin",
     "require": {
         "php": "^7.4|^8.0",
         "ext-json": "*",
         "krayin/laravel-crm": "^1.0"
     },
     "support": {
-        "docs": "https://github.com/sms77io/krayin",
-        "email": "support@sms77.io",
-        "rss": "https://www.sms77.io/de/feed/",
-        "source": "https://github.com/sms77io/krayin"
+        "docs": "https://github.com/seven-io/krayin",
+        "email": "support@seven.io",
+        "rss": "https://www.seven.io/de/feed/",
+        "source": "https://github.com/seven-io/krayin"
     },
     "type": "library"
 }

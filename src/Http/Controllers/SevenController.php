@@ -1,6 +1,6 @@
 <?php
 
-namespace Sms77\Krayin\Http\Controllers;
+namespace Seven\Krayin\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
@@ -8,33 +8,33 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
-use Sms77\Krayin\Repositories\SmsRepository;
-use Sms77\Krayin\Services\Sms77;
+use Seven\Krayin\Repositories\SmsRepository;
+use Seven\Krayin\Services\Seven;
 use Webkul\Contact\Repositories\PersonRepository;
 
-class Sms77Controller extends Controller {
+class SevenController extends Controller {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /** @var PersonRepository $personRepository */
     protected PersonRepository $personRepository;
 
-    /** @var Sms77 $sms77 */
-    protected Sms77 $sms77;
+    /** @var Seven $seven */
+    protected Seven $seven;
 
     /** @var SmsRepository $smsRepository */
     protected SmsRepository $smsRepository;
 
     /**
-     * @param Sms77 $sms77
+     * @param Seven $seven
      * @param SmsRepository $smsRepository
      * @param PersonRepository $personRepository
      */
     public function __construct(
-        Sms77            $sms77,
+        Seven            $seven,
         SmsRepository    $smsRepository,
         PersonRepository $personRepository
     ) {
-        $this->sms77 = $sms77;
+        $this->seven = $seven;
         $this->smsRepository = $smsRepository;
         $this->personRepository = $personRepository;
     }
@@ -44,7 +44,7 @@ class Sms77Controller extends Controller {
      * @return View
      */
     public function index(): View {
-        return view('sms77::index', ['entityType' => 'persons']);
+        return view('seven::index', ['entityType' => 'persons']);
     }
 
     /**
@@ -71,19 +71,18 @@ class Sms77Controller extends Controller {
      * @return View
      */
     protected function sms(string $entityType, int $id): View {
-        return view('sms77::sms', compact('entityType', 'id'));
+        return view('seven::sms', compact('entityType', 'id'));
     }
 
     public function smsSend(): RedirectResponse {
         $request = request();
 
         if ($request->method() === 'POST') {
-            $errors = $this->sms77->sms($request);
+            $errors = $this->seven->sms($request);
 
             if (count($errors)) return redirect()->back();
         }
 
         return redirect()->back();
-        return redirect()->route('admin.contacts.persons.index');
     }
 }

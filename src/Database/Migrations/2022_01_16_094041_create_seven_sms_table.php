@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSms77SmsTable extends Migration {
+class CreateSevenSmsTable extends Migration {
     /**
      * Run the migrations.
      * @return void
      */
     public function up() {
-        Schema::create('sms77_sms', function (Blueprint $table) {
+        Schema::create('seven_sms', function (Blueprint $table) {
             $table->increments('id');
             $table->json('response')->nullable();
             $table->text('text');
@@ -24,6 +24,6 @@ class CreateSms77SmsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('sms77_sms');
+        Schema::dropIfExists('seven_sms');
     }
 }

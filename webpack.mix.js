@@ -7,7 +7,7 @@ const inProduction = mix.inProduction()
 
 const publicPath = inProduction
     ? 'publishable/assets'
-    : '../../../public/vendor/sms77/assets'
+    : '../../../public/vendor/seven/assets'
 
 mix.setPublicPath(publicPath).mergeManifest()
 mix.disableNotifications()
