@@ -5,6 +5,7 @@ namespace Seven\Krayin\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Seven\Krayin\Services\Configuration;
 use Seven\Krayin\View\Components\Sms\Flash;
 use Seven\Krayin\View\Components\Sms\From;
 use Seven\Krayin\View\Components\Sms\PerformanceTracking;
@@ -13,7 +14,7 @@ use Webkul\Admin\DataGrids\Contact\OrganizationDataGrid;
 use Webkul\Admin\DataGrids\Contact\PersonDataGrid;
 
 class SevenServiceProvider extends ServiceProvider {
-    public function boot(): void {
+    public function boot(Configuration $configuration): void {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
@@ -29,6 +30,10 @@ class SevenServiceProvider extends ServiceProvider {
         Event::listen('admin.layout.head.before', function ($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('seven::style');
         });
+
+        if (!empty($configuration->getPersonCreateAfterText())) {
+            Event::listen('contacts.person.create.after', 'Seven\Krayin\Listeners\ContactsListener@afterCreatePerson');
+        }
 
         Blade::component('seven-sms-flash', Flash::class);
         Blade::component('seven-sms-text', Text::class);

@@ -6,10 +6,7 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Seven\Krayin\Exceptions\UnprocessableEntityTypeException;
-use Webkul\Contact\Models\Person;
 use Webkul\Contact\Repositories\PersonRepository;
 
 class Seven {
@@ -17,7 +14,7 @@ class Seven {
 
     public function __construct(
         protected PersonRepository     $personRepository,
-        protected Configuration $configuration
+        protected Configuration $configuration,
     ) {
         $this->client = new Client([
             'base_uri' => 'https://gateway.seven.io/api/',
@@ -29,9 +26,7 @@ class Seven {
         ]);
     }
 
-    public function sms(Request $request): array {
-        $persons = $this->getPersons($request);
-
+    public function sms(array $smsParams, ...$persons): array {
         if (empty($persons)) {
             $error = __('seven::app.no_recipients');
             $errors[] = $error;
@@ -41,7 +36,7 @@ class Seven {
             $msgCount = 0;
             $receivers = 0;
 
-            $text = $request->post('text');
+            $text = $smsParams['text'];
             $errors = [];
             $requests = [];
             $matches = [];
@@ -69,12 +64,6 @@ class Seven {
             else $requests[] = [
                 'text' => $text,
                 'to' => $this->getContactsNumbers(...$persons),
-            ];
-
-            $smsParams = [
-                'from' => $request->post('from'),
-                'flash' => '1' === $request->post('flash'),
-                'performance_tracking' => '1' === $request->post('performance_tracking')
             ];
 
             foreach ($requests as $req) {
@@ -106,31 +95,6 @@ class Seven {
         }
 
         return $errors;
-    }
-
-    /**
-     * @param Request $request
-     * @return Person[]
-     */
-    protected function getPersons(Request $request): array {
-        $entityType = $request->post('entityType');
-        $id = $request->post('id');
-
-        switch ($entityType) {
-            case 'persons':
-                if ($id) return [$this->personRepository->find($id)];
-
-                /** @var Collection $collection */
-                $collection = $this->personRepository->all();
-                return $collection->all();
-            case 'organizations':
-                /** @var Collection $collection */
-                $collection = $this->personRepository
-                    ->findByField('organization_id', $id);
-                return $collection->all();
-            default:
-                throw new UnprocessableEntityTypeException($entityType, $id);
-        }
     }
 
     protected function getContactsNumbers(...$persons): string {

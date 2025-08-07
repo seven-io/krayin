@@ -31,4 +31,8 @@ class Configuration {
     public function getSmsFrom(): ?string {
         return $this->findOneByField('sms.from');
     }
+
+    public function getPersonCreateAfterText(): ?string {
+        return $this->findOneByField('events.msg_person_create_after');
+    }
 }

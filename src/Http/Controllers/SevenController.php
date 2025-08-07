@@ -8,6 +8,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
+use Seven\Krayin\Services\Personell;
+use Seven\Krayin\Services\RequestHandler;
 use Seven\Krayin\Services\Seven;
 
 class SevenController extends Controller {
@@ -15,6 +17,7 @@ class SevenController extends Controller {
 
     public function __construct(
         protected Seven            $seven,
+        protected  Personell $personell
     ) {
     }
 
@@ -48,7 +51,12 @@ class SevenController extends Controller {
         $request = request();
 
         if ($request->method() === 'POST') {
-            $errors = $this->seven->sms($request);
+            $requestHandler = new RequestHandler($request);
+            $requestHandler->validateSmsParams();
+            $errors = $this->seven->sms(
+                $requestHandler->buildSmsParams(),
+                ...$this->personell->getPersons($request)
+            );
 
             if (count($errors)) return redirect()->back();
         }
