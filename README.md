@@ -5,7 +5,7 @@ Adds the functionality to send SMS via seven.
 ## Prerequisites
 
 - An [API Key](https://help.seven.io/en/api-key-access) from [seven](https://www.seven.io)
-- [Krayin CRM](https://krayincrm.com/) - tested with v1.2.x
+- [Krayin CRM](https://krayincrm.com/) - tested with v2
 
 ## Installation
 

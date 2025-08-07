@@ -2,9 +2,9 @@
 
 return [
     [
-        'key' => 'seven',
-        'name' => 'Seven',
+        'key'   => 'seven',
+        'name'  => 'seven::app.name',
         'route' => 'admin.seven.index',
-        'sort' => 2,
+        'sort'  => 99,
     ],
 ];

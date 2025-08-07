@@ -2,8 +2,8 @@
 
 @section('title')
     @lang('seven::app.send_sms')
-@stop
+@endsection
 
 @section('heading')
     @lang('seven::app.send_sms')
-@stop
+@endsection

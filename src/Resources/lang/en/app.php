@@ -13,6 +13,9 @@ return [
     'phone' => 'Phone',
     'send_sms' => 'Send SMS',
     'send_sms_bulk' => 'Send Bulk SMS',
+    'settings' => 'Settings',
+    'settings_info' => 'All settings regarding the seven extension',
     'sms_sent' => 'Sent :msgCount SMS to :receivers recipients for :cost €',
     'text' => 'Text',
+    'text_placeholder' => 'Dear {{name}}'
 ];

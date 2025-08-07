@@ -9,55 +9,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Seven\Krayin\Exceptions\UnprocessableEntityTypeException;
-use Seven\Krayin\Models\Sms;
 use Webkul\Contact\Models\Person;
 use Webkul\Contact\Repositories\PersonRepository;
-use Webkul\Core\Models\CoreConfig;
-use Webkul\Core\Repositories\CoreConfigRepository;
 
 class Seven {
-    /** @var string|null $apiKey */
-    protected ?string $apiKey;
-
-    /** @var Client $client */
     protected Client $client;
 
-    /** @var PersonRepository $personRepository */
-    protected PersonRepository $personRepository;
-
-    /** @var CoreConfigRepository $coreConfigRepository */
-    protected CoreConfigRepository $coreConfigRepository;
-
-    /**
-     * @param PersonRepository $personRepository
-     * @param CoreConfigRepository $coreConfigRepository
-     */
     public function __construct(
-        PersonRepository     $personRepository,
-        CoreConfigRepository $coreConfigRepository
+        protected PersonRepository     $personRepository,
+        protected Configuration $configuration
     ) {
-        $this->personRepository = $personRepository;
-        $this->coreConfigRepository = $coreConfigRepository;
-        $this->apiKey = self::getApiKey();
         $this->client = new Client([
             'base_uri' => 'https://gateway.seven.io/api/',
             RequestOptions::HEADERS => [
+                'Accept' => 'application/json',
                 'SentWith' => 'KrayinCRM',
-                'X-Api-Key' => $this->apiKey,
+                'X-Api-Key' => $this->configuration->getApiKey(),
             ],
         ]);
-    }
-
-    private function getApiKey(): ?string {
-        $coreConfig = $this->coreConfigRepository->findOneByField('code',
-            'seven.general.api_key');
-
-        if ($coreConfig) {
-            /** @var CoreConfig $coreConfig */
-            return $coreConfig->getAttribute('value');
-        }
-
-        return config('services.seven.api_key');
     }
 
     public function sms(Request $request): array {
@@ -102,24 +71,17 @@ class Seven {
                 'to' => $this->getContactsNumbers(...$persons),
             ];
 
-            $smsParams = ['json' => true,];
-
-            foreach (['from',] as $key) {
-                $value = $request->post($key);
-                if ($value) $smsParams[$key] = $value;
-            }
-
-            foreach (['flash', 'performance_tracking',] as $key)
-                if ('on' === $request->post($key)) $smsParams[$key] = true;
+            $smsParams = [
+                'from' => $request->post('from'),
+                'flash' => '1' === $request->post('flash'),
+                'performance_tracking' => '1' === $request->post('performance_tracking')
+            ];
 
             foreach ($requests as $req) {
                 try {
                     $response = $this->client->post('sms',
                         [RequestOptions::JSON => array_merge($smsParams, $req)])
                         ->getBody()->getContents();
-                    (new Sms)->fill(
-                        array_merge($req, compact('response'), ['to' => [$req['to']]]))
-                        ->save();
                     $response = json_decode($response);
 
                     Log::info('seven responded to SMS dispatch.', compact('response'));

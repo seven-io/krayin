@@ -13,6 +13,9 @@ return [
     'phone' => 'Rufnummer',
     'send_sms' => 'SMS senden',
     'send_sms_bulk' => 'SMS-Massenversand',
+    'settings' => 'Einstellungen',
+    'settings_info' => 'Sämtliche Einstellungen zur Erweiterung von seven',
     'sms_sent' => ':msgCount SMS versandt an :receivers Empfangsziele für :cost €',
     'text' => 'Text',
+    'text_placeholder' => 'Hallo {{name}}'
 ];
