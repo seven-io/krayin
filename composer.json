@@ -28,14 +28,14 @@
     "license": "MIT",
     "name": "seven.io/krayin",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.2",
         "ext-json": "*",
-        "krayin/laravel-crm": "^1.0"
+        "krayin/laravel-crm": "^2.0"
     },
     "support": {
         "docs": "https://github.com/seven-io/krayin",
         "email": "support@seven.io",
-        "rss": "https://www.seven.io/de/feed/",
+        "rss": "https://www.seven.io/en/feed/",
         "source": "https://github.com/seven-io/krayin"
     },
     "type": "library"

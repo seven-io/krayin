@@ -1,109 +1,33 @@
-@extends('admin::layouts.master')
+<x-admin::layouts>
+    <x-slot:title>
+        @yield('title') - @lang('seven::app.name')
+    </x-slot>
 
-@section('page_title')
-    @yield('title') - @lang('seven::app.name')
-@stop
-
-@section('content-wrapper')
-    <div class='content full-page dashboard'>
-        <div class='page-header'>
-            <div class='page-title'>
-                <h1>@yield('heading')</h1>
+    <div class="flex flex-col gap-4">
+        <div class="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+            <div class="flex flex-col gap-2">
+                <div class="text-xl font-bold dark:text-white">
+                    @yield('heading')
+                </div>
             </div>
-
-            <div class='page-action'></div>
         </div>
 
-        <form method='POST' action='{{ route('admin.seven.sms_submit') }}'>
-            @csrf()
+        <div class="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
+            <form method="POST" action="{{ route('admin.seven.sms_submit') }}">
+                @csrf
 
-            <div class='page-content'>
-                <input name='id' value='{{ $id ?? null }}' type='hidden'/>
-                <input name='entityType' value='{{ $entityType }}' type='hidden'/>
+                <input name="id" value="{{ $id ?? null }}" type="hidden"/>
+                <input name="entityType" value="{{ $entityType }}" type="hidden"/>
 
                 @yield('filters')
 
-                <div class='form-group' :class='[errors.has(`flash`) ? `has-error` : ``]'>
-                    <label for='flash'>
-                        @lang('seven::app.flash')
-                    </label>
+                <x-seven-sms-flash></x-seven-sms-flash>
+                <x-seven-sms-performance-tracking></x-seven-sms-performance-tracking>
+                <x-seven-sms-from></x-seven-sms-from>
+                <x-seven-sms-text></x-seven-sms-text>
 
-                    <label class='switch'>
-                        <input
-                                class='control'
-                                id='flash'
-                                name='flash'
-                                type='checkbox'
-                                {{ old('flash') ? 'checked' : '' }}
-                        />
-
-                        <span class='slider round'></span>
-                    </label>
-                </div>
-
-                <div class='form-group'
-                     :class='[errors.has(`performance_tracking`) ? `has-error` : ``]'>
-                    <label for='performance_tracking'>
-                        @lang('seven::app.performance_tracking')
-                    </label>
-
-                    <label class='switch'>
-                        <input
-                                class='control'
-                                id='performance_tracking'
-                                name='performance_tracking'
-                                type='checkbox'
-                                {{ old('performance_tracking') ? 'checked' : '' }}
-                        />
-
-                        <span class='slider round'></span>
-                    </label>
-                </div>
-
-                <div class='form-group' :class='[errors.has(`from`) ? `has-error` : ``]'>
-                    <label for='from'>
-                        @lang('seven::app.from')
-                    </label>
-
-                    <input
-                            class='control'
-                            data-vv-as='&quot;@lang('seven::app.from')&quot;'
-                            name='from'
-                            id='from'
-                            v-validate='{
-                             max: 16,
-                             regex: /^([+]?[0-9]{1,16}|[a-zA-Z0-9 \-_+/()&$!,.@]{1,11})$/
-                            }'
-                            value='{{ old('from') }}'
-                    />
-
-                    <span class='control-error' v-if='errors.has(`from`)'>
-                        @{{ errors.first('from') }}
-                    </span>
-                </div>
-
-                <div class='form-group' :class='[errors.has(`text`) ? `has-error` : ``]'>
-                    <label for='text' class='required'>
-                        @lang('seven::app.text')
-                    </label>
-
-                    <textarea
-                            class='control'
-                            data-vv-as='&quot;@lang('seven::app.text')&quot;'
-                            id='text'
-                            name='text'
-                            v-validate='`required|max:1520`'
-                    >{{ old('text') }}</textarea>
-
-                    <span class='control-error' v-if='errors.has(`text`)'>
-                        @{{ errors.first('text') }}
-                    </span>
-                </div>
-
-                <button type='submit' class='btn btn-md btn-primary'>
-                    @lang('seven::app.send_sms')
-                </button>
-            </div>
-        </form>
+                <button type='submit' class='primary-button'>@lang('seven::app.send_sms')</button>
+            </form>
+        </div>
     </div>
-@stop
+</x-admin::layouts>
