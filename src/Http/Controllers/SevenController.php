@@ -9,14 +9,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
 use Seven\Krayin\Services\Seven;
-use Webkul\Contact\Repositories\PersonRepository;
 
 class SevenController extends Controller {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct(
         protected Seven            $seven,
-        protected PersonRepository $personRepository
     ) {
     }
 
@@ -24,7 +22,8 @@ class SevenController extends Controller {
      * Display a listing of the resource.
      */
     public function index(): View {
-        return view('seven::index', ['entityType' => 'persons']);
+        $entityType = 'persons';
+        return view('seven::index', compact('entityType'));
     }
 
     /**

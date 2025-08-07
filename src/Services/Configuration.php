@@ -27,4 +27,8 @@ class Configuration {
     public function getApiKey(): ?string {
         return $this->findOneByField('general.api_key');
     }
+
+    public function getSmsFrom(): ?string {
+        return $this->findOneByField('sms.from');
+    }
 }

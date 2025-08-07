@@ -6,7 +6,7 @@
     <x-admin::form.control-group.control
         type="text"
         name="from"
-        value="{{ old('from') }}"
+        value="{{ old('from', $smsFrom) }}"
         placeholder='Krayin'
         rules="max:16|regex:/^([+]?[0-9]{1,16}|[a-zA-Z0-9 \-_+\/()&$!,.@]{1,11})$/"
     />
