@@ -35,7 +35,7 @@
     "support": {
         "docs": "https://github.com/seven-io/krayin",
         "email": "support@seven.io",
-        "rss": "https://www.seven.io/de/feed/",
+        "rss": "https://www.seven.io/en/feed/",
         "source": "https://github.com/seven-io/krayin"
     },
     "type": "library"
