@@ -15,17 +15,12 @@ use Webkul\Admin\DataGrids\Contact\PersonDataGrid;
 
 class SevenServiceProvider extends ServiceProvider {
     public function boot(Configuration $configuration): void {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
-
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'seven');
-
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'seven');
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('seven/build'),
         ], 'public');
-
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'seven');
 
         Event::listen('admin.layout.head.before', function ($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('seven::style');
@@ -42,7 +37,13 @@ class SevenServiceProvider extends ServiceProvider {
     }
 
     public function register(): void {
-        $this->registerConfig();
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/menu.php', 'menu.admin');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/acl.php', 'acl');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/core_config.php', 'core_config');
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/krayin-vite.php',
+            'krayin-vite.viters'
+        );
 
         $this->app->extend(PersonDataGrid::class,
             function (PersonDataGrid $service, $app) {
@@ -65,15 +66,5 @@ class SevenServiceProvider extends ServiceProvider {
                 ]);
                 return $service;
             });
-    }
-
-    protected function registerConfig(): void {
-        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/menu.php', 'menu.admin');
-        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/acl.php', 'acl');
-        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/core_config.php', 'core_config');
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/krayin-vite.php',
-            'krayin-vite.viters'
-        );
     }
 }
